@@ -2,23 +2,23 @@
 
 require "functions.php";
 // require "router.php";
-?>
 
 
 // connect to mysql database
+$dsn = "mysql:host=localhost;port=3306;dbname=myapp;user=root;charset=utf8mb4";
+$pdo = new PDO($dsn);
 
-class Person{
-    public $name;
-    public $age;
+//query to send to mysql and execution
+$statement = $pdo->prepare("SELECT * FROM `posts`");
+$statement->execute();
 
-     public function breathe(){
-        echo "breathing";
-    }
+//fetched all results
+$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+// dd($posts);
+
+//displayed the data in the database as an unordered list
+foreach($posts as $post){
+    echo "<li>".$post['title']."</li>";
 }
-
-$person = new Person();
-
-$person->name = "John Doe";
-$person->age = "25"
-
-dd($person->age);
+?>
