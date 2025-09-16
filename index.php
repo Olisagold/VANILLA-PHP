@@ -7,13 +7,13 @@ require "functions.php";
 
 class Database{
 
-    public function query(){
+    public function query($query){
         // connect to mysql database
         $dsn = "mysql:host=localhost;port=3306;dbname=myapp;user=root;charset=utf8mb4";
         $pdo = new PDO($dsn);
 
         //query to send to mysql and execution
-        $statement = $pdo->prepare("SELECT * FROM `posts`");
+        $statement = $pdo->prepare($query);
         $statement->execute();
 
         //fetched all results
@@ -23,7 +23,7 @@ class Database{
 //object
 $db = new Database();
 
-$posts = $db->query();
+$posts = $db->query("SELECT * FROM `posts` where id = 1;");
 
 //displayed the data in the database as an unordered list
 foreach($posts as $post){
