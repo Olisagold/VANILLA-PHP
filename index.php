@@ -4,9 +4,11 @@ require "functions.php";
 // require "router.php";
 require "Database.php";
 
+// connect to mysql database from the config file
+$config = require('config.php');      
 
 //object
-$db = new Database();
+$db = new Database($config['database']);
 
 $posts = $db->query("SELECT * FROM `posts`")->fetchAll(PDO::FETCH_ASSOC);;
 
