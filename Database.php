@@ -17,13 +17,21 @@ class Database{
         ]);
     }
 
-    public function query($query){
+    public function query($query, $params = []){
         //query to send to mysql and execution
         $statement = $this->connection->prepare($query);
-        $statement->execute();
+        $statement->execute($params);
 
         //fetched all results
         return $statement;
     }
 }
 ?>
+
+
+<!-- CREATE TABLE `users`(
+	`id` int(6) NOT NULL AUTO_INCREMENT,
+    `username` varchar(100) NOT NULL, 
+    `admin` tinyint(2) NOT NULL DEFAULT '0',
+    PRIMARY KEY(`id`)
+) -->
